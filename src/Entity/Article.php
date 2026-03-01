@@ -55,6 +55,9 @@ class Article
     #[Assert\NotNull(message: 'La date de création est obligatoire.')]
     private ?\DateTimeInterface $dateCreation = null;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Categorie $categorie = null;
+
     # getters
 
     public function getId(): ?int
@@ -112,5 +115,17 @@ class Article
     public function setPublie(bool $val): void
     {
         $this->public = $val;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 }
